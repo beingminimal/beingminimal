@@ -1,0 +1,89 @@
+{
+  "repo_ruleset": [
+    {
+      "name": "default-branch-workflow",
+      "target": "branch",
+      "enforcement": "active",
+      "bypass_actors": [
+        {
+          "actor_id": 1,
+          "actor_type": "OrganizationAdmin",
+          "bypass_mode": "always"
+        },
+        {
+          "actor_id": 799033,
+          "actor_type": "Integration",
+          "bypass_mode": "always"
+        },
+        {
+          "actor_id": 393930,
+          "actor_type": "Integration",
+          "bypass_mode": "always"
+        }
+      ],
+      "conditions": {
+        "ref_name": {
+          "exclude": [],
+          "include": [
+            "~DEFAULT_BRANCH"
+          ]
+        }
+      },
+      "rules": [
+        {
+          "type": "commit_author_email_pattern",
+          "parameters": {
+            "operator": "contains",
+            "pattern": "github"
+          }
+        },
+        {
+          "type": "creation"
+        },
+        {
+          "type": "deletion"
+        },
+        {
+          "type": "required_linear_history"
+        },
+        
+        {
+          "type": "pull_request",
+          "parameters": {
+            "dismiss_stale_reviews_on_push": true,
+            "require_code_owner_review": false,
+            "require_last_push_approval": true,
+            "required_approving_review_count": 1,
+            "required_review_thread_resolution": true
+          }
+        },
+        {
+          "type": "non_fast_forward"
+        }
+      ]
+    }
+  ],
+  "settings": {
+    "is_template": false,
+    "default_branch": "main",
+    "has_wiki": true,
+    "has_issues": true,
+    "has_discussions": false,
+    "has_projects": true,
+    "allow_merge_commit": true,
+    "allow_squash_merge": true,
+    "allow_update_branch": false,
+    "allow_auto_merge": false,
+    "delete_branch_on_merge": true,
+    "squash_merge_commit_title": "COMMIT_OR_PR_TITLE",
+    "squash_merge_commit_message": "COMMIT_MESSAGES",
+    "merge_commit_title": "MERGE_MESSAGE",
+    "merge_commit_message": "PR_TITLE",
+    "archived": false
+  },
+  "teamsAccess": {
+    "read": [],
+    "write": []
+  },
+  "teams": []
+}
